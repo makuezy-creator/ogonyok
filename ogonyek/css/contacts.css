@@ -1,0 +1,378 @@
+/* Стили страницы контактов: hero-баннер, карточки контактной информации, карта и блок преимуществ. */
+
+/* =========================
+   CONTACTS — HERO
+========================= */
+
+.contacts-hero {
+    position: relative;
+    min-height: 520px;
+    overflow: hidden;
+}
+
+.contacts-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contacts-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg,
+            rgba(0, 0, 0, .96) 0%,
+            rgba(0, 0, 0, .90) 40%,
+            rgba(0, 0, 0, .35) 70%,
+            rgba(0, 0, 0, .1) 100%);
+}
+
+.contacts-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.contacts-hero__content {
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 560px;
+}
+
+.contacts-hero__content h1 {
+    font-family: 'Arsenal', serif;
+    font-size: 90px;
+    line-height: 90%;
+    margin-bottom: 20px;
+}
+
+.contacts-hero__content h2 {
+    font-size: 35px;
+    color: #FD6500;
+    margin-bottom: 18px;
+}
+
+.contacts-hero__content p {
+    color: #9c9c9c;
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.hero-btn {
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 30px;
+    border: 2px solid #FD6500;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.hero-btn:hover {
+    background: #FD6500;
+}
+
+.hero-btn img {
+    width: 20px;
+}
+
+/* =========================
+   CONTACTS — CARDS
+========================= */
+
+.contacts-info {
+    padding: 60px 0 40px;
+}
+
+.contacts-grid {
+    background: #171717;
+    border: 1px solid #181818;
+    border-radius: 15px;
+    min-height: 150px;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
+}
+
+.contact-card {
+    padding: 34px 28px;
+    transition: .35s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.contact-card:not(:last-child) {
+    border-right: 1px solid #181818;
+}
+
+.contact-card:hover {
+    background: #131313;
+}
+
+.contact-card img {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+.contact-card h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.contact-card span {
+    display: block;
+    color: #FD6500;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.contact-card p {
+    color: #8f8f8f;
+    line-height: 1.7;
+}
+
+/* =========================
+   CONTACTS — MAP
+========================= */
+
+.map-section {
+    padding: 90px 0;
+}
+
+.section-title h2 {
+    font-size: 45px;
+    font-weight: 700;
+    color: white;
+}
+
+.section-title p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #9c9c9c;
+    margin-bottom: 15px;
+}
+
+.map-box {
+    overflow: hidden;
+    border-radius: 15px;
+    border: 1px solid #1f1f1f;
+}
+
+.map-box iframe {
+    display: block;
+    width: 100%;
+    height: 600px;
+    border: none;
+}
+
+/* =========================
+   CONTACTS — ADVANTAGES
+========================= */
+
+.advantages {
+    padding-bottom: 70px;
+}
+
+.advantages-grid {
+    background: #171717;
+    border: 1px solid #181818;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: hidden;
+}
+
+.advantage-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 35px;
+    transition: .35s ease;
+    position: relative;
+}
+
+.advantage-card:not(:last-child) {
+    border-right: 1px solid #171717;
+}
+
+.advantage-card:hover {
+    background: #131313;
+}
+
+.advantage-card img {
+    width: 70px;
+    height: 70px;
+}
+
+.advantage-card h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.advantage-card p {
+    color: #878787;
+    font-size: 18px;
+}
+
+/* =========================
+   1200px
+========================= */
+
+@media(max-width:1200px) {
+
+    .contacts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-card {
+        border-right: none;
+        border-bottom: 1px solid #181818;
+    }
+
+    .contact-card:nth-child(odd) {
+        border-right: 1px solid #181818;
+    }
+
+    .contact-card:nth-child(3),
+    .contact-card:nth-child(4) {
+        border-bottom: none;
+    }
+
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .advantage-card {
+        border-right: none !important;
+        border-bottom: 1px solid #171717;
+    }
+
+    .advantage-card:last-child {
+        border-bottom: none;
+    }
+
+}
+
+/* =========================
+   992px
+========================= */
+
+@media(max-width:992px) {
+
+    .contacts-hero__image {
+        opacity: .25;
+    }
+
+}
+
+/* =========================
+   768px
+========================= */
+
+@media(max-width:768px) {
+
+    .contacts-hero {
+        min-height: auto;
+    }
+
+    .contacts-hero__content {
+        min-height: auto;
+        padding: 80px 0;
+    }
+
+    .contacts-hero__content h1 {
+        font-size: 54px;
+    }
+
+    .contacts-hero__content h2 {
+        font-size: 30px;
+    }
+
+    .contacts-hero__content p {
+        font-size: 18px;
+    }
+
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        border-right: none !important;
+        border-bottom: 1px solid #181818;
+    }
+
+    .contact-card:last-child {
+        border-bottom: none;
+    }
+
+    .map-box {
+        height: 350px;
+    }
+
+    .advantage-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .advantage-card h3 {
+        font-size: 22px;
+    }
+
+    .advantage-card p {
+        font-size: 16px;
+    }
+
+}
+
+/* =========================
+   576px
+========================= */
+
+@media(max-width:576px) {
+
+    .contacts-hero__content h1 {
+        font-size: 46px;
+    }
+
+    .contacts-hero__content h2 {
+        font-size: 24px;
+    }
+
+    .hero-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .contact-card {
+        padding: 25px;
+    }
+
+    .contact-card img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .contact-card span {
+        font-size: 16px;
+    }
+
+    .map-box {
+        height: 300px;
+        border-radius: 15px;
+    }
+}

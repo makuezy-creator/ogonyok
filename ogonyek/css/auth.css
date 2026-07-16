@@ -1,0 +1,897 @@
+/* Стили страниц авторизации, регистрации и личного кабинета: формы ввода, адресная книга, история заказов/броней и confirm-модалки. */
+
+/* =========================
+   AUTH — PAGES LAYOUT
+========================= */
+
+.auth-section {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+    position: relative;
+    overflow: visible;
+}
+
+/* Background light effects */
+.auth-section::before {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(253, 101, 0, 0.08);
+    border-radius: 50%;
+    filter: blur(80px);
+    top: -100px;
+    left: -100px;
+    pointer-events: none;
+}
+
+.auth-section::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(253, 101, 0, 0.05);
+    border-radius: 50%;
+    filter: blur(100px);
+    bottom: -150px;
+    right: -100px;
+    pointer-events: none;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(10, 10, 10, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 45px 40px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(253, 101, 0, 0.03);
+    z-index: 5;
+    position: relative;
+    transition: all 0.4s ease;
+    margin: auto 0;
+}
+
+.auth-container:hover {
+    border-color: rgba(253, 101, 0, 0.25);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85), 0 0 50px rgba(253, 101, 0, 0.06);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.auth-header h1 {
+    font-family: "Arsenal", serif;
+    font-size: 38px;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.auth-header p {
+    color: var(--text-muted, #878787);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.form-group input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    transition: opacity 0.3s ease;
+}
+
+.form-group input:focus::placeholder {
+    opacity: 0.55;
+}
+
+/* Accent highlight on label when focused */
+.form-group:focus-within label {
+    color: var(--orange, #FD6500);
+}
+
+.form-group input:focus {
+    border-color: var(--orange, #FD6500);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 16px rgba(253, 101, 0, 0.25), inset 0 0 8px rgba(253, 101, 0, 0.05);
+}
+
+/* Password wrapper for show/hide toggle */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 55px !important;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition, 0.3s ease);
+    user-select: none;
+    padding: 5px;
+}
+
+.password-toggle:hover {
+    color: var(--orange, #FD6500);
+}
+
+/* Error states */
+.error-message {
+    font-size: 12px;
+    color: #ff4d4d;
+    min-height: 18px;
+    margin-top: 2px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+}
+
+.form-group.invalid .error-message {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-group.invalid input {
+    border-color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.02);
+    box-shadow: 0 0 12px rgba(255, 77, 77, 0.15);
+}
+
+.form-group.invalid:focus-within label {
+    color: #ff4d4d;
+}
+
+/* Shake Animation for Invalid Submission */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-6px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(6px);
+    }
+}
+
+.form-group.invalid.shake-animation {
+    animation: shake 0.4s ease;
+}
+
+.auth-btn {
+    background: linear-gradient(135deg, var(--orange, #FD6500) 0%, #d84b00 100%);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 12px;
+    transition: var(--transition, 0.3s ease);
+    margin-top: 15px;
+    box-shadow: 0 8px 20px rgba(253, 101, 0, 0.25);
+    letter-spacing: 0.5px;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(253, 101, 0, 0.4);
+    filter: brightness(1.05);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(253, 101, 0, 0.25);
+}
+
+.auth-link-text {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: var(--text-muted, #878787);
+}
+
+.auth-link-text a {
+    color: var(--orange, #FD6500);
+    font-weight: 600;
+    transition: var(--transition, 0.3s ease);
+    margin-left: 5px;
+}
+
+.auth-link-text a:hover {
+    color: #e05900;
+    text-decoration: underline;
+}
+
+/* =========================
+   LOGGED IN PANEL (OPTIONAL)
+========================= */
+
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: rgba(253, 101, 0, 0.1);
+    border: 2px solid var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 auto 15px;
+}
+
+.profile-name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.profile-email {
+    color: var(--text-muted, #878787);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+
+/* Expanded profile mode */
+.auth-container.profile-mode {
+    max-width: 1100px;
+    width: 95%;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 45px;
+}
+
+.profile-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    padding-right: 40px;
+}
+
+.profile-sidebar h1 {
+    font-size: 32px;
+}
+
+.profile-sidebar .profile-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.profile-sidebar .profile-email {
+    font-size: 14px;
+    color: var(--text-muted, #878787);
+    margin-bottom: 6px;
+}
+
+.profile-phone {
+    font-size: 14px;
+    color: var(--text-muted, #878787);
+    margin-bottom: 15px;
+}
+
+.profile-info-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.edit-profile-btn {
+    background: transparent;
+    border: 1px solid var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.edit-profile-btn:hover {
+    background: var(--orange, #FD6500);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(253, 101, 0, 0.25);
+}
+
+.profile-info-edit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.profile-info-edit .form-group {
+    gap: 6px;
+}
+
+.profile-info-edit input {
+    padding: 10px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.profile-edit-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.save-profile-btn {
+    flex: 1;
+    background: linear-gradient(135deg, var(--orange, #FD6500) 0%, #d84b00 100%);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(253, 101, 0, 0.15);
+}
+
+.save-profile-btn:hover {
+    box-shadow: 0 6px 15px rgba(253, 101, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.cancel-profile-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-profile-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-section {
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.profile-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.add-address-btn {
+    background: transparent;
+    border: 1px solid var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-address-btn:hover {
+    background: var(--orange, #FD6500);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(253, 101, 0, 0.2);
+}
+
+.profile-addresses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.profile-address-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.profile-address-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(253, 101, 0, 0.15);
+}
+
+.profile-address-card__info {
+    flex: 1;
+}
+
+.profile-address-card__label {
+    display: inline-block;
+    background: rgba(253, 101, 0, 0.1);
+    color: var(--orange, #FD6500);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.profile-address-card__text {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.profile-address-card__actions {
+    display: flex;
+    gap: 8px;
+}
+
+.profile-address-card__btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.profile-address-card__btn--edit:hover {
+    border-color: var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+}
+
+.profile-address-card__btn--delete:hover {
+    border-color: #ff3838;
+    color: #ff3838;
+}
+
+.profile-address-form {
+    text-align: left;
+    margin-top: 15px;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-address-form h4 {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.address-title {
+    font-family: "Arsenal", serif;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+.profile-address-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr;
+    gap: 12px;
+}
+
+.profile-address-form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.profile-address-form-buttons .auth-btn {
+    flex: 1;
+    margin: 0;
+    padding: 12px;
+    font-size: 15px;
+}
+
+.cancel-address-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.cancel-address-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* =========================
+   ORDERS HISTORY
+========================= */
+
+.profile-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.profile-orders-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.profile-orders-list::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+.profile-order-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-order-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 10px;
+}
+
+.profile-order-card__meta h4 {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.profile-order-card__meta span {
+    font-size: 12px;
+    color: var(--text-muted, #878787);
+}
+
+.profile-order-card__total {
+    text-align: right;
+}
+
+.profile-order-card__total .price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--orange, #FD6500);
+}
+
+.profile-order-card__total .status {
+    font-size: 11px;
+    color: #00ca72;
+    background: rgba(0, 202, 114, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+.profile-order-card__details {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.profile-order-card__items {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 8px 0;
+}
+
+.profile-order-card__items li {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+}
+
+.profile-order-card__items li:last-child {
+    border-bottom: none;
+}
+
+.profile-order-card__address {
+    font-size: 12px;
+    color: var(--text-muted, #878787);
+    line-height: 1.4;
+    margin-top: 4px;
+}
+
+.profile-order-repeat-btn {
+    background: rgba(253, 101, 0, 0.08);
+    border: 1px solid rgba(253, 101, 0, 0.2);
+    color: var(--orange, #FD6500);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    outline: none;
+}
+
+.profile-order-repeat-btn:hover {
+    background: var(--orange, #FD6500);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(253, 101, 0, 0.25);
+}
+
+.profile-orders-empty {
+    text-align: center;
+    color: var(--text-muted, #878787);
+    font-size: 13px;
+    padding: 30px 0;
+}
+
+@media (max-width: 992px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .profile-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-right: 0;
+        padding-bottom: 30px;
+    }
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 35px 20px;
+        border-radius: 18px;
+    }
+
+    .auth-header h1 {
+        font-size: 30px;
+    }
+}
+
+/* Custom Modals (Confirm Dialog) - MOVED TO css/style.css for global usage */
+
+/* =========================
+   BOOKING CARDS IN PROFILE
+========================= */
+
+.profile-booking-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.profile-booking-card:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(253, 101, 0, 0.15);
+}
+
+.profile-booking-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 10px;
+}
+
+.profile-booking-card__meta h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.profile-booking-card__meta span {
+    font-size: 12px;
+    color: var(--text-muted, #878787);
+}
+
+.profile-booking-card__status {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+}
+
+.profile-booking-card__details {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.profile-booking-card__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.45;
+}
+
+.profile-booking-card__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.profile-booking-card__icon img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.65;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.profile-booking-card:hover .profile-booking-card__icon img {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.profile-booking-card__comment {
+    color: var(--text-muted, #878787);
+    font-style: italic;
+}
+
+/* Empty state for bookings */
+.profile-bookings-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 20px;
+    text-align: center;
+    gap: 10px;
+}
+
+
+.profile-bookings-empty p {
+    color: var(--text-muted, #878787);
+    font-size: 13px;
+}
+
+.admin-panel-btn-profile {
+    display: inline-block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.admin-panel-btn-profile:hover {
+    background: var(--orange, #FD6500);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(253, 101, 0, 0.3);
+}

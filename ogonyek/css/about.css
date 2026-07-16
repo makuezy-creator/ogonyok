@@ -1,0 +1,507 @@
+/* Стили информационной страницы «О нас»: преимущества, история ресторана, команда шефов и статистика. */
+
+/* =========================
+   ABOUT — HERO
+========================= */
+
+.about-hero {
+    position: relative;
+    min-height: 760px;
+    overflow: hidden;
+}
+
+.about-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+.about-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg,
+            rgba(0, 0, 0, .96) 0%,
+            rgba(0, 0, 0, .82) 30%,
+            rgba(0, 0, 0, .45) 65%,
+            rgba(0, 0, 0, .08) 100%);
+    z-index: 1;
+}
+
+.about-hero .container {
+    position: relative;
+    z-index: 2;
+    min-height: 760px;
+    display: flex;
+    align-items: center;
+}
+
+.about-hero__content {
+    max-width: 560px;
+}
+
+.about-hero__content h1 {
+    font-family: "Arsenal", serif;
+    font-size: 88px;
+    line-height: .95;
+    margin-bottom: 30px;
+}
+
+.about-hero__content h2 {
+    color: #FD6500;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+.about-hero__content p {
+    font-size: 22px;
+    line-height: 1.9;
+    color: #b5b5b5;
+    margin-bottom: 45px;
+}
+
+/* =========================
+   ABOUT — FEATURES
+========================= */
+
+.features {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.features-grid {
+    background: #171717;
+    border: 1px solid #181818;
+    border-radius: 15px;
+    min-height: 150px;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: hidden;
+}
+
+.feature-card {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 15px 30px;
+    transition: .35s ease;
+}
+
+.feature-card:hover {
+    background: #131313;
+}
+
+.feature-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    font-size: 18px;
+    color: #878787;
+    line-height: 1.5;
+}
+
+/* =========================
+   ABOUT — HISTORY
+========================= */
+
+.history {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.history-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.history-image {
+    overflow: hidden;
+    border-radius: 30px;
+}
+
+.history-image img {
+    margin-top: 50px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .6s ease;
+}
+
+.history-image:hover img {
+    transform: scale(1.05);
+}
+
+.history-content h2 {
+    font-family: "Arsenal", serif;
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 70px;
+    margin-bottom: 10px;
+}
+
+.history-content h3 {
+    font-size: 34px;
+    color: #FD6500;
+    margin-bottom: 45px;
+}
+
+.history-content p {
+    color: #bcbcbc;
+    font-size: 20px;
+    line-height: 1.9;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   ABOUT — TEAM
+========================= */
+
+.team {
+    padding-bottom: 90px;
+}
+
+.section-title {
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-family: "Arsenal", serif;
+    font-size: 64px;
+    margin-bottom: 15px;
+}
+
+.section-title p {
+    color: #FD6500;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.team-card {
+    background: #0b0b0b;
+    border: 1px solid #1f1f1f;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    transition: .35s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    border-color: #FD6500;
+    box-shadow:
+        0 0 25px rgba(255, 115, 0, .15);
+}
+
+.team-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.team-card h3 {
+    font-size: 28px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.team-card span {
+    display: block;
+    color: #FD6500;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.team-card p {
+    color: #b5b5b5;
+    line-height: 1.8;
+    padding: 0 20px 30px;
+}
+
+/* =========================
+   ABOUT — STATS
+========================= */
+
+.stats {
+    margin-top: -60px;
+    margin-bottom: 50px;
+}
+
+.stats-grid {
+    background: #171717;
+    border: 1px solid #181818;
+    border-radius: 15px;
+    min-height: 150px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding: 15px 30px;
+    transition: .3s ease;
+}
+
+.stat-item:hover {
+    background: #131313;
+}
+
+.stat-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-content h3 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #FD6500;
+}
+
+.stat-content p {
+    font-size: 18px;
+    color: #878787;
+    line-height: 1.5;
+}
+
+/* =========================
+   ABOUT — SCROLL ANIMATION
+========================= */
+
+.feature-card,
+.team-card,
+.stat-item {
+    transition:
+        .35s ease,
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+/* =========================
+   1200px
+========================= */
+
+@media (max-width:1200px) {
+
+    .about-hero__content h1 {
+        font-size: 72px;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* =========================
+   992px
+========================= */
+
+@media (max-width:992px) {
+
+    .about-hero {
+        min-height: 650px;
+    }
+
+    .about-hero .container {
+        min-height: 650px;
+    }
+
+    .about-hero__content h1 {
+        font-size: 64px;
+    }
+
+    .about-hero__content p {
+        font-size: 18px;
+    }
+
+    .about-hero__image {
+        opacity: .25;
+    }
+
+    .history-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .history-content {
+        text-align: center;
+    }
+
+}
+
+/* =========================
+   768px
+========================= */
+
+@media (max-width:768px) {
+
+    .about-hero {
+        min-height: 620px;
+    }
+
+    .about-hero .container {
+        min-height: 620px;
+    }
+
+    .about-hero__content {
+        max-width: 100%;
+    }
+
+    .about-hero__content h1 {
+        font-size: 52px;
+    }
+
+    .about-hero__content h2 {
+        font-size: 22px;
+    }
+
+    .about-hero__content p {
+        font-size: 17px;
+        line-height: 1.8;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        padding: 25px;
+    }
+
+    .history {
+        padding: 70px 0;
+    }
+
+    .history-content h2 {
+        font-size: 42px;
+    }
+
+    .history-content h3 {
+        font-size: 28px;
+    }
+
+    .history-content p {
+        font-size: 17px;
+    }
+
+    .section-title h2 {
+        font-size: 46px;
+    }
+
+    .section-title p {
+        font-size: 22px;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-content h3 {
+        font-size: 42px;
+    }
+
+}
+
+/* =========================
+   576px
+========================= */
+
+@media (max-width:576px) {
+
+    .about-hero {
+        min-height: 540px;
+    }
+
+    .about-hero .container {
+        min-height: 540px;
+    }
+
+    .about-hero__content h1 {
+        font-size: 42px;
+    }
+
+    .about-hero__content h2 {
+        font-size: 18px;
+    }
+
+    .about-hero__content p {
+        font-size: 15px;
+    }
+
+    .feature-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .feature-card img {
+        margin: 0 auto;
+    }
+
+    .history-image img {
+        height: 260px;
+    }
+
+    .history-content h2 {
+        font-size: 34px;
+    }
+
+    .history-content h3 {
+        font-size: 22px;
+    }
+
+    .section-title h2 {
+        font-size: 36px;
+    }
+
+    .section-title p {
+        font-size: 18px;
+    }
+
+    .team-card h3 {
+        font-size: 22px;
+    }
+
+}

@@ -1,0 +1,739 @@
+/* Стили страницы бронирования стола: hero-баннер, форма резервирования, кастомный календарь и модальные окна. */
+
+/* =========================
+   BOOKING — HERO
+========================= */
+
+.booking-hero {
+    position: relative;
+    min-height: 635px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #1b1b1b;
+}
+
+.booking-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+.booking-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.8) 40%,
+            rgba(0, 0, 0, 0.4) 100%);
+    z-index: 1;
+}
+
+.booking-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.booking-hero__content {
+    max-width: 560px;
+}
+
+.booking-hero__content h1 {
+    font-family: "Arsenal", serif;
+    font-size: 85px;
+    line-height: 90%;
+    margin-bottom: 20px;
+}
+
+.booking-hero__content h1 span {
+    display: block;
+    color: var(--orange, #FD6500);
+}
+
+.booking-hero__content p {
+    font-size: 20px;
+    color: #c7c7c7;
+    letter-spacing: 10%;
+    line-height: 1.7;
+}
+
+/* =========================
+   BOOKING — FORM
+========================= */
+
+.booking-section {
+    padding: 100px 0;
+    background: #000;
+}
+
+.booking-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(10, 10, 10, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 50px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(253, 101, 0, 0.03);
+    transition: all 0.4s ease;
+}
+
+.booking-wrapper:hover {
+    border-color: rgba(253, 101, 0, 0.25);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85), 0 0 50px rgba(253, 101, 0, 0.06);
+}
+
+.booking-title {
+    font-family: "Arsenal", serif;
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-align: center;
+    background: linear-gradient(135deg, #fff 60%, #ff8a00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.5px;
+}
+
+.booking-subtitle {
+    font-size: 20px;
+    color: var(--text-muted, #878787);
+    text-align: center;
+    margin-bottom: 40px;
+    line-height: 1.7;
+    letter-spacing: 10%;
+}
+
+.booking-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+/* Highlight label when focused */
+.form-group:focus-within label {
+    color: var(--orange, #FD6500);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom styling for standard select arrow */
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 16px;
+    padding-right: 45px;
+}
+
+.form-group select:focus {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FD6500' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--orange, #FD6500);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 16px rgba(253, 101, 0, 0.25), inset 0 0 8px rgba(253, 101, 0, 0.05);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Calendar and time picker icon colorization */
+.form-group input::-webkit-calendar-picker-indicator {
+    filter: invert(1) sepia(1) saturate(5) hue-rotate(345deg);
+    /* Orange tint matching --orange */
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.form-group input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+/* Spin button dark mode */
+.form-group input[type="number"]::-webkit-inner-spin-button,
+.form-group input[type="number"]::-webkit-outer-spin-button {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+/* Error states */
+.error-message {
+    font-size: 12px;
+    color: #ff4d4d;
+    min-height: 18px;
+    margin-top: 2px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+}
+
+.form-group.invalid .error-message {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-group.invalid input,
+.form-group.invalid select,
+.form-group.invalid textarea {
+    border-color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.02);
+    box-shadow: 0 0 12px rgba(255, 77, 77, 0.15);
+}
+
+.form-group.invalid:focus-within label {
+    color: #ff4d4d;
+}
+
+/* Shake Animation for Invalid Submission */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-6px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(6px);
+    }
+}
+
+.form-group.invalid.shake-animation {
+    animation: shake 0.4s ease;
+}
+
+.booking-submit-btn {
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--orange, #FD6500) 0%, #d84b00 100%);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 20px;
+    border-radius: 12px;
+    transition: var(--transition, 0.3s ease);
+    margin-top: 15px;
+    box-shadow: 0 8px 20px rgba(253, 101, 0, 0.25);
+    letter-spacing: 0.5px;
+}
+
+.booking-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(253, 101, 0, 0.4);
+    filter: brightness(1.05);
+}
+
+.booking-submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(253, 101, 0, 0.25);
+}
+
+/* =========================
+   SUCCESS MODAL
+========================= */
+
+.booking-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.booking-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.booking-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
+
+.booking-modal__content {
+    position: relative;
+    z-index: 2;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 50px 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    transform: translateY(30px);
+    transition: .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.booking-modal.active .booking-modal__content {
+    transform: translateY(0);
+}
+
+.booking-modal__icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(253, 101, 0, 0.1);
+    border: 2px solid var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 25px;
+}
+
+.booking-modal h3 {
+    font-family: "Arsenal", serif;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.booking-modal p {
+    color: #a0a0a0;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.booking-modal__btn {
+    background: var(--orange, #FD6500);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 40px;
+    border-radius: 8px;
+    transition: var(--transition, 0.3s ease);
+}
+
+.booking-modal__btn:hover {
+    background: #e05900;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    .booking-hero__content h1 {
+        font-size: 52px;
+    }
+
+    .booking-wrapper {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+
+    .booking-form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .form-group.full-width,
+    .booking-submit-btn {
+        grid-column: span 1;
+    }
+}
+
+/* =========================
+   AUTH BANNER (Not Logged In)
+========================= */
+
+.booking-auth-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 30px;
+    gap: 16px;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.booking-auth-banner__icon {
+    font-size: 52px;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 0 15px rgba(253, 101, 0, 0.3));
+}
+
+.booking-auth-banner h3 {
+    font-family: "Arsenal", serif;
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.booking-auth-banner p {
+    font-size: 15px;
+    color: var(--text-muted, #878787);
+    line-height: 1.65;
+    max-width: 420px;
+}
+
+.booking-auth-banner__actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.booking-auth-banner__btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+}
+
+.booking-auth-banner__btn--primary {
+    background: linear-gradient(135deg, var(--orange, #FD6500) 0%, #d84b00 100%);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(253, 101, 0, 0.3);
+}
+
+.booking-auth-banner__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(253, 101, 0, 0.45);
+    filter: brightness(1.05);
+}
+
+.booking-auth-banner__btn--secondary {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.booking-auth-banner__btn--secondary:hover {
+    border-color: var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    background: rgba(253, 101, 0, 0.04);
+}
+
+/* =========================
+   TIME SLOTS LOADING HINT
+========================= */
+
+.slots-loading {
+    font-size: 12px;
+    color: rgba(253, 101, 0, 0.8);
+    letter-spacing: 0.3px;
+    animation: slotsPulse 1.2s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes slotsPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+
+/* Заблокированный select (до выбора даты) */
+.form-group select:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* Placeholder-опция внутри select */
+.form-group select option[value=""] {
+    color: rgba(255, 255, 255, 0.35);
+    font-style: italic;
+}
+
+/* Недоступные опции в select (занятые слоты) */
+.form-group select option:disabled {
+    color: #555;
+    font-style: italic;
+}
+
+/* ============================================================
+   CUSTOM DATE PICKER & CALENDAR POPUP
+   ============================================================ */
+
+.date-picker-group {
+    align-self: start;
+}
+
+.custom-date-input-wrapper {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+}
+
+.custom-date-input-wrapper input {
+    cursor: pointer;
+    width: 100% !important;
+    padding-right: 50px; /* Space for the calendar icon */
+}
+
+.calendar-trigger-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+}
+
+.calendar-trigger-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.custom-date-input-wrapper:hover .calendar-trigger-icon {
+    opacity: 1;
+}
+
+.custom-calendar-popup {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    min-width: 320px;
+    background: rgba(10, 10, 10, 0.95);
+    border: 1px solid rgba(253, 101, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.95), 0 0 25px rgba(253, 101, 0, 0.08);
+    backdrop-filter: blur(25px);
+    z-index: 1000;
+    display: none;
+    user-select: none;
+    animation: fadeInCalendar 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-calendar-popup.active {
+    display: block;
+}
+
+@keyframes fadeInCalendar {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.calendar-header h4 {
+    font-family: "Arsenal", serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+
+.calendar-nav-btn {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.calendar-nav-btn:hover {
+    border-color: var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    background: rgba(253, 101, 0, 0.05);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    text-align: center;
+}
+
+.calendar-weekday {
+    font-size: 12px;
+    color: var(--text-muted, #878787);
+    font-weight: 600;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-transform: uppercase;
+}
+
+.calendar-day {
+    font-size: 14px;
+    color: #fff;
+    padding: 8px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+}
+
+.calendar-day:hover:not(.disabled) {
+    background: rgba(253, 101, 0, 0.15);
+    color: var(--orange, #FD6500);
+}
+
+.calendar-day.disabled {
+    color: rgba(255, 255, 255, 0.1);
+    cursor: not-allowed;
+    background: transparent;
+    text-decoration: line-through;
+}
+
+.calendar-day.other-month {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-day.today {
+    border: 1.5px solid var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    font-weight: 700;
+}
+
+.calendar-day.selected {
+    background: var(--orange, #FD6500) !important;
+    color: #fff !important;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(253, 101, 0, 0.45);
+}
+
+/* ============================================================
+   TIME CHIPS GRID
+   ============================================================ */
+
+.booking-time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 12px;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.time-slots-placeholder {
+    grid-column: 1 / -1;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.35);
+    font-style: italic;
+    text-align: center;
+    padding: 15px 0;
+    border: 1.5px dashed rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.time-slot-chip {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 10px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.time-slot-chip:hover:not(.disabled) {
+    border-color: var(--orange, #FD6500);
+    color: var(--orange, #FD6500);
+    background: rgba(253, 101, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(253, 101, 0, 0.05);
+    transform: translateY(-1px);
+}
+
+.time-slot-chip.selected {
+    background: var(--orange, #FD6500);
+    border-color: var(--orange, #FD6500);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(253, 101, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.time-slot-chip.disabled {
+    opacity: 0.15;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.01);
+    border-color: rgba(255, 255, 255, 0.04);
+    text-decoration: line-through;
+}
